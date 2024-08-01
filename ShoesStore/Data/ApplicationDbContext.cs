@@ -15,5 +15,6 @@ namespace ShoesStore.Data
 	   public	DbSet<Product> Products { get; set; }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Cart> cart { get; set; }
+		public DbSet<CartProduct> cartProduct { get; set; }
 	}
 }

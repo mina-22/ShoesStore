@@ -20,23 +20,63 @@ namespace ShoesStore.Controllers
 		}
 		public IActionResult Cart()
 		{
-			return View();
+			var userId = _userManager.GetUserId(User);
+			var user = _db.Users.Include(m=>m.cart).SingleOrDefault(m=>m.Id == userId);
+			List<CartProduct> cartProducts = _db.cartProduct.Include(m=>m.product).Where(m=>m.CartId==user.cart.Id).ToList();
+            List<QuantityProduct> Qproducts = new List<QuantityProduct>();
+			foreach(var item in cartProducts)
+			{
+				Qproducts.Add(new QuantityProduct
+				{
+					product = item.product,
+					Quantity = item.Quantity,
+					ItemId = item.Id
+					
+				}) ;
+
+            }
+            return View(Qproducts);
 		}
-		public IActionResult AddToCart(Product product)
+		public IActionResult DeleteFromCart(int id)
+		{
+			var cartprod = _db.cartProduct.Find(id);
+			_db.cartProduct.Remove(cartprod);
+			_db.SaveChanges();
+			return RedirectToAction("Cart");
+		}
+		//handel duplecate elements
+		[HttpPost]
+        public IActionResult AddToCart(QuantityProduct Qproduct)
 		{
 			var userId = _userManager.GetUserId(User);
+			var user = _db.Users.Include(m => m.cart).SingleOrDefault(m => m.Id == userId);
+			var prod = _db.Products.Find(Qproduct.product.Id);
+          List<  CartProduct >ProductCard = _db.cartProduct.Where(m => m.productId == Qproduct.product.Id).ToList();
+			
+			if (ProductCard.Count != 0) 
 
-			var user = _db.Users.Include(m=>m.cart).SingleOrDefault(m => m.Id == userId);
-			var prod = _db.Products.Find(product.Id);
-			prod.Quantity = product.Quantity;
-			user.cart.Products.Add(prod);
-				
-			_db.Users.Update(user);
+            {
+				ProductCard[0].Quantity = Math.Max(Qproduct.Quantity,1);
+				_db.cartProduct.Update(ProductCard[0]);
+				_db.SaveChanges();
+				return RedirectToAction("Cart");
+			}
+			else
+			{
+                CartProduct cartProduct = new CartProduct();
+                cartProduct.Quantity = Qproduct.Quantity;
+                cartProduct.CartId = user.cart.Id;
+                cartProduct.productId = Qproduct.product.Id;
+
+                _db.cartProduct.Add(cartProduct);
+            }
+			
 			_db.SaveChanges();
-			int i = 0;
-			return View();
+			Qproduct.product = prod;
+			return View("SingleProduct", Qproduct);
 		}
-        [Authorize]
+		
+		[Authorize]
         public IActionResult Contact()
 		{
 			
@@ -66,8 +106,12 @@ namespace ShoesStore.Controllers
 
         public IActionResult SingleProduct(int id)
 		{
-			var product = _db.Products.Find(id);
-			return View(product);
+			var prod = _db.Products.Find(id);
+			QuantityProduct cartProduct = new QuantityProduct
+			{
+				product = prod 
+			};
+			return View(cartProduct);
 		}
 		public IActionResult LookBook()
 		{

@@ -6,7 +6,5 @@ namespace ShoesStore.Models
 	{
 		[Key]
 	        public	int Id { get; set; }
-		    
-		    public List<Product> ?Products = new List<Product>();
 	}
 }

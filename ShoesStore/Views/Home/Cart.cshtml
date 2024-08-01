@@ -1,4 +1,8 @@
-﻿<div class="cart-container">
+﻿@model List<QuantityProduct>
+@{
+    int value = 0;
+}
+<div class="cart-container">
     <h1>Cart</h1>
     <div class="notification">
         <span>“Women's Tan Sneaker” removed. </span><a href="#">Undo?</a>
@@ -11,23 +15,71 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Subtotal</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
 
-                <tr>
-                    <td>
-                        <img src="imgs/Doctor.jpg" alt="Women's Peach Training">
-                        <span>Women's Peach Training</span>
-                    </td>
-                    <td>$57.90</td>
-                    <td>
-                        <button class="quantity-btn">-</button>
-                        <input type="number" value="1">
-                        <button class="quantity-btn">+</button>
-                    </td>
-                    <td>$57.90</td>
-                </tr>
+                @{
+                    float total = 0;
+                    foreach(var item in Model)
+                    {
+                        float y =0;
+                        value = item.Quantity;
+                            <tr>
+                                                <td>
+                                                    <img src="~/Images/@item.product.PathImg" alt="Women's Peach Training">
+                                                    <span>@item.product.Name</span>
+                                                </td>
+                                                @if(item.product.Sale>0)
+                            {
+                                                    <td>$@item.product.Sale</td>
+                              y =  item.product.Sale  *(float)item.Quantity;
+                              
+                            }
+                            else
+                            {
+                                                    <td>$@item.product.Price</td>
+
+                                y =(float) item.product.Price * (float)item.Quantity;
+
+                            }
+
+                                                <td>
+                                <form asp-action="AddToCart" asp-controller="Home">
+                                    <button type="button" class="quantity-btn" data-action="decrease">-</button>
+                                    <input type="hidden" name="product.Id" value="@item.product.Id" />
+                                    <input type="hidden" name="Quantity" value="@value" />
+                                    <input type="hidden" name="ItemId" asp-for="@item.ItemId" />
+                                    <input type="text" value="@value" disabled>
+                                    <button type="button" class="quantity-btn" data-action="increase">+</button>
+                                    <input type="submit" style="display:none;" />
+                                </form>
+                                                </td>
+                                                @if (item.product.Sale > 0)
+                            {
+                                                    <td>$@y
+                                                       
+                                                         
+                                                        
+                                                    </td>
+                                total += item.Quantity * item.product.Sale;
+                            }
+                            else
+                            {
+                                                    <td>
+                                                        $
+                                                       @y
+                                                    </td>
+                                total += item.Quantity * (float)item.product.Price;
+                            }
+                                                <td>
+                                                     <a asp-controller="Home" asp-action="DeleteFromCart" asp-route-id="@item.ItemId"> <i class="fa-regular fa-circle-xmark delete-icon"></i></a>
+                                                </td>
+                                            </tr>
+                        
+                    }
+                }
             </tbody>
         </table>
         <div class="cart-totals">
@@ -35,11 +87,11 @@
             <div class="totals">
                 <div class="subtotal">
                     <span>Subtotal</span>
-                    <span>$147.80</span>
+                    <span>$@total</span>
                 </div>
                 <div class="total">
                     <span>Total</span>
-                    <span>$147.80</span>
+                    <span>$@total</span>
                 </div>
             </div>
             <div class="coupon">
@@ -50,3 +102,23 @@
         </div>
     </div>
 </div>
+<script>
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const action = this.getAttribute('data-action');
+            const form = this.closest('form');
+            let quantityInput = form.querySelector('input[name="Quantity"]');
+            let quantity = parseInt(quantityInput.value);
+
+            if (action === 'increase') {
+                quantity += 1;
+            } else if (action === 'decrease') {
+                quantity = Math.max(1, quantity - 1);
+            }
+
+            quantityInput.value = quantity;
+            form.submit();
+        });
+    });
+   x
+</script>

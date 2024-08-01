@@ -9,5 +9,6 @@ namespace ShoesStore.Models
 	
 		public string? Address { set; get; }
         public	Cart? cart { set; get; }
+		
     }
 }

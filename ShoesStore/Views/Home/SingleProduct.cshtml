@@ -1,4 +1,4 @@
-﻿@model Product 
+﻿@model QuantityProduct
 @{
 	Layout = "_SharedLayOut";
 }
@@ -10,12 +10,12 @@
         <div class="content-single">
             <div class="start-single">
                 <div class="left-single">
-                    <img src="~/Images/@Model.PathImg" alt="" class="img-single">
+                    <img src="~/Images/@Model.product.PathImg" alt="" class="img-single">
                 </div>
                 <div class="right-single">
                     <div class="link-single">
                         @{
-                            if (Model.Gender)
+                            if (Model.product.Gender)
                             {
                                 <a href="" class="men-single">Men</a>
                             }
@@ -29,27 +29,25 @@
                         <span>, </span>
                         <a href="" class="Sneaker-single">Sneaker</a>
                     </div>
-                    <p class="blue-single">@Model.Name</p>
+                    <p class="blue-single">@Model.product.Name</p>
                     <div class="delete-single">
                         @{
-                            if (Model.Sale > 0)
+                            if (Model.product.Sale > 0)
                             {
-                                <del class="bdl-single">$@Model.Sale</del>
+                                <del class="bdl-single">$@Model.product.Sale</del>
                             }
                         }
 
-                        <span class="zeft-single"> $@Model.Price</span>
+                        <span class="zeft-single"> $@Model.product.Price</span>
                         <span class="free-single"> & Free Shipping</span>
                     </div>
-                    <p class="klam-single">@Model.Description sodales purus non pellentesque amet, nunc sit eu, enim fringilla egestas pulvinar  lectus enim eget eu et lobortis faucibus. </p>
+                    <p class="klam-single">@Model.product.Description sodales purus non pellentesque amet, nunc sit eu, enim fringilla egestas pulvinar  lectus enim eget eu et lobortis faucibus. </p>
                     <div class="btn-single">
                         <div class="small-single" style="display: flex;">
                             <button class="minus-single">-</button>
-                            <form asp-action="AddToCart" asp-controller="Home">
+                            <form asp-action="AddToCart" asp-controller="Home" id="myForm">
 								<input type="number" id="quantity" value="1" min="1" asp-for="Quantity">
-								<input hidden asp-for="Id" />
-                                <button type="submit" class="btn btn-secondary mt-5">Add to Cart</button>
-
+                                <input hidden asp-for="product.Id" />
 							</form>
                             <button class="plus-single">+</button>
                         </div>
@@ -57,7 +55,7 @@
                     </div>
                   
                         
-                    
+                    <button type="submit" onclick="submitForm()" class="btn btn-secondary mt-5">Add to Cart</button>
 
                 </div>
             </div>
@@ -79,4 +77,7 @@
             value = 49;
         input.value = value + 1;
     });
+    function submitForm() {
+        document.getElementById("myForm").submit();
+    }
 </script>

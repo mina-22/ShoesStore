@@ -27,8 +27,5 @@ namespace ShoesStore.Models
 		[NotMapped]
 		[Required(ErrorMessage = "Product Image is Required")]
 		public IFormFile ProductImage { set; get; }
-		public List<Cart>? Carts { get; set; }
-		
-		public int ?Quantity{ get; set; }
 	}
 }
