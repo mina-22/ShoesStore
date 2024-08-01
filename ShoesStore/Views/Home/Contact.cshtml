@@ -1,0 +1,180 @@
+﻿@model Blog
+@{
+    Layout = "_SharedLayOut";
+}
+<main>
+    <section class="sec1-cont">
+        <h1 class="text-center">Contact</h1>
+
+        <div class=" parent1-cont ">
+            <div class="container d-flex cont">
+                <div class="text-form">
+                    <div>
+                        <div class="card-text-form d-flex">
+                            <div class="me-2 mt-1"><i class="fa-solid fa-mobile"></i></div>
+                            <div>
+                                <h3> Products & order </h3>
+                                <p>(+1) 123-456-7890<br>available 24/7</p>
+                            </div>
+                        </div>
+                        <div class="card-text-form d-flex">
+                            <div class="me-2 mt-1"><i class="fa-solid fa-mobile"></i></div>
+                            <div>
+                                <h3>Info & enquiries</h3>
+                                <p>(+1) 123-456-7890<br>available 24/7</p>
+                            </div>
+                        </div>
+                        <div class="card-text-form d-flex">
+                            <div class="me-2 mt-1" ><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h3>
+                                    Store locator
+                                </h3>
+                                <p>Find our retail near you</p>
+
+                            </div>
+                        </div>
+                        <div class="ms-3">
+                            <div>STAY IN TOUCH</div>
+                            <div>
+                                <i class="fa-brands fa-facebook me-3"></i>
+                                <i class="fa-brands fa-twitter me-3"></i>
+                                <i class="fa-brands fa-youtube "></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+				<div class="form">
+                    <span style="color: green; font-size:20px; "> @TempData["Addsucc"]</span>
+
+                    <form asp-action="AddBlog" asp-controller="Home" method="post">
+
+                        <div class="div-input">
+                            
+                            <div><label asp-for="@Model.UserName">Name <span style="color: red;">*</span></label></div>
+                            <div class="width-input"><input asp-for="@Model.UserName" class="inputs"  type="text" ></div>
+                            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="div-input">
+                            <div><label asp-for="@Model.UserEmail">E-mail <span style="color: red;" >*</span></label></div>
+                            <div><input asp-for="@Model.UserEmail" class="inputs"  type="email" disabled> </div>
+                        </div>
+                        <div class="div-input">
+
+                            <div>
+                                <label asp-for="@Model.Message" >Comment or Message <span style="color: red;">*</span></label>
+                            </div>
+                            <textarea asp-for="@Model.Message"  id="com" cols="100" rows="5"></textarea>
+                            <span asp-validation-for="@Model.Message" class="text-danger"> </span>
+                        </div>
+
+                        <div>
+
+                            <button  class="btn-form" type="submit">SEND Message</button>
+
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="sec2-cont ">
+        <div class="parent2-cont">
+            <h2>Frequently Asked Questions</h2>
+            <p>Purus amet scelerisque nisl nibh felis massa a enim gravida</p>
+
+            <div class="accordion mt-5" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Accordion Item #1
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body text-drop">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                            ullamcorper mattis, pulvinar dapibus leo.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header " id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Accordion Item #2
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body text-drop">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                            ullamcorper mattis, pulvinar dapibus leo.
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body text-drop">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                            ullamcorper mattis, pulvinar dapibus leo.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Accordion Item #4
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body text-drop">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                            ullamcorper mattis, pulvinar dapibus leo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="last-sec">
+        <div class="last-parent d-flex justify-content-center align-items-center">
+            <div class="text-last-sec ">
+                <h2>Better for People & the Planet</h2>
+                <p>Ut eget at et aliquam sit quis nisl, pharetra et ac pharetra est dictum in vulputate</p>
+                <div class="d-flex justify-content-center btns-last-sec">
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            MEN SHOP
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            WOMEN SHOP
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

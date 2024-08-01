@@ -1,0 +1,166 @@
+﻿@model ProductsCollection
+@{
+    Layout = "_SharedLayOut";
+    var incrementnum = Model.CollectionNum + 1;
+    var decnum = Model.CollectionNum - 1;
+
+}
+<main>
+    <h1 class="mb-4">Sale</h1>
+   
+    <section class="sec1-sale mt-5">
+        <div class="parent1-sale">
+            <div class="photos-sec1 ">
+                <div class="left-photo-sec1 d-flex justify-content-center align-items-center">
+                    <div class="text-center">
+                        <p>Refer a friend</p>
+                        <h2>Get 20% OFF</h2>
+                        <div class="botton-sec1-div">
+                            <a href="#">
+                                <div class="botton-sec1">
+                                    LEARN MORE
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="right-photo-sec1 d-flex justify-content-center align-items-center">
+                    <div class="text-center">
+                        <div>
+                            <p>Promotion</p>
+                            <h2>Student Discount</h2>
+                        </div>
+                        <div class="botton-sec1-div">
+                            <div class="botton-sec1">
+                                LEARN MORE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- END OF SECTION ONE -->
+    <!-- ------------------------------- -->
+    <!-- START OF SECTION TWO -->
+    <div class="d-flex justify-content-center align-items-center" style="margin-top:10%;">
+        <div class="d-flex mb-2 ">
+            <a asp-action="GetPreviousSale" asp-route-CollectionNum="@decnum" class="btn btn-secondary me-4 btn-select" role="button">
+                <span class="material-symbols-outlined">
+                    Previous
+                </span>
+            </a>
+            <a asp-action="GetNextSale" asp-route-CollectionNum="@incrementnum" class="btn btn-secondary btn-select" role="button" id="btn-next">
+                <span class="material-symbols-outlined">
+                    Next
+                </span>
+            </a>
+        </div>
+        <div class="d-flex align-items-center justify-content-center ms-5 " style=" width: 50px;
+                          height: 50px;
+                           border-radius: 50%;
+                          background-color: #6e7051;
+                              padding-top : 1%;
+                        color : white;
+                          font-size: 35px;">
+            <p> @incrementnum</p>
+        </div>
+    </div>
+   
+    <section class="sec2-sale">
+        <div class="parent2-sale">
+            <div class="text-sec5 d-flex ">
+                <h4>Last Pairs</h4>
+                <p>VIEW ALL</p>
+
+            </div>
+
+
+            <div class="cards-sec5 row mt-5 pe-5">
+                @{
+                    @foreach (var p in Model.products)
+                    {
+                        <div class="card-sec5 col-4 items card">
+                        <a asp-route-id="@p.Id" asp-action="SingleProduct" asp-controller="Home">
+                            <div class="img-card-sec5 img-card">
+                                <img src="~/Images/@p.PathImg" alt="">
+                                <div class="under-card d-flex align-items-center justify-content-center">
+                                    Quick view
+                                </div>
+                            </div>
+                            <div class="text-card-sec5">
+                                <p class="p1-text-sec5">@p.Name</p>
+                                
+                                    <p class="p2-text-sec5"><del>@p.Price$</del> @p.Sale$ </p>
+                                <div class="description-card">
+                                    <p>
+                                        @p.Description purus non pellentesque amet,
+                                        nunc sit eu, enim fringilla egestas pulvinar odio feugiat consectetur egestas
+                                        magna pharetra cursus risus, lectus enim eget eu et lobortis faucibus.
+                                    </p>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    }
+                }
+
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- END OF SECTION TWO -->
+    <!-- ------------------------------- -->
+    <!-- START OF SECTION THREE -->
+    <section class="sec3-sale">
+        <div class="parent3-sale  container">
+            <div class="text-sec3-sale d-flex">
+                <div class="icon-sec3 me-5">
+                    <i class="fa-solid fa-gifts"></i>
+                </div>
+                <div>
+                    <h2>The best gift</h2>
+                    <p>Lacus vel sit eu integer leo nec ornare consequat eget dolor</p>
+                </div>
+            </div>
+            <div class="btn-sec3-div">
+                <a href="#">
+                    <div class="botton-sec3">
+                        SHOP GIFT CARD
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- END OF SECTION THREE -->
+    <!-- -------------------------------- -->
+    <!-- THE LAST SECTION -->
+
+    <section class="last-sec">
+        <div class="last-parent d-flex justify-content-center align-items-center">
+            <div class="text-last-sec ">
+                <h2>Better for People & the Planet</h2>
+                <p>Ut eget at et aliquam sit quis nisl, pharetra et ac pharetra est dictum in vulputate</p>
+                <div class="d-flex justify-content-center btns-last-sec">
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            MEN SHOP
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            WOMEN SHOP
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

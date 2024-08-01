@@ -1,0 +1,82 @@
+﻿@model Product 
+@{
+	Layout = "_SharedLayOut";
+}
+<main>
+
+
+    <div class="parent-single">
+
+        <div class="content-single">
+            <div class="start-single">
+                <div class="left-single">
+                    <img src="~/Images/@Model.PathImg" alt="" class="img-single">
+                </div>
+                <div class="right-single">
+                    <div class="link-single">
+                        @{
+                            if (Model.Gender)
+                            {
+                                <a href="" class="men-single">Men</a>
+                            }
+                            else
+                            {
+                                <a href="" class="men-single">Women</a>
+                            }
+
+                        }
+
+                        <span>, </span>
+                        <a href="" class="Sneaker-single">Sneaker</a>
+                    </div>
+                    <p class="blue-single">@Model.Name</p>
+                    <div class="delete-single">
+                        @{
+                            if (Model.Sale > 0)
+                            {
+                                <del class="bdl-single">$@Model.Sale</del>
+                            }
+                        }
+
+                        <span class="zeft-single"> $@Model.Price</span>
+                        <span class="free-single"> & Free Shipping</span>
+                    </div>
+                    <p class="klam-single">@Model.Description sodales purus non pellentesque amet, nunc sit eu, enim fringilla egestas pulvinar  lectus enim eget eu et lobortis faucibus. </p>
+                    <div class="btn-single">
+                        <div class="small-single" style="display: flex;">
+                            <button class="minus-single">-</button>
+                            <form asp-action="AddToCart" asp-controller="Home">
+								<input type="number" id="quantity" value="1" min="1" asp-for="Quantity">
+								<input hidden asp-for="Id" />
+                                <button type="submit" class="btn btn-secondary mt-5">Add to Cart</button>
+
+							</form>
+                            <button class="plus-single">+</button>
+                        </div>
+
+                    </div>
+                  
+                        
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script> 
+
+    document.querySelector('.minus-single').addEventListener('click', function () {
+        let input = document.getElementById('quantity');
+        let value = parseInt(input.value);
+        if (value > 1)
+            input.value = value - 1;
+    });
+    document.querySelector('.plus-single').addEventListener('click', function () {
+        let input = document.getElementById('quantity');
+        let value = parseInt(input.value);
+        if (value > 50)
+            value = 49;
+        input.value = value + 1;
+    });
+</script>

@@ -1,0 +1,274 @@
+﻿
+/* --------------------------------------- */
+.h1-look {
+    font-size: 80px;
+    text-align: center;
+    margin: 75px 0;
+}
+
+.parent {
+    
+    height: 150%;
+}
+
+.parent2 {
+    height: 130%;
+    width: 95%;
+    margin: auto;
+}
+
+.text {
+    width: 40%;
+}
+
+.bottom-sec h2 {
+    font-size: 40px;
+}
+
+.bottom-sec {
+    width: 90%;
+    margin: auto;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.p1 {
+    font-size: 20px;
+    color: #a9a99b;
+    margin-bottom: 40px;
+}
+
+.p2 a:hover {
+    color: black;
+}
+
+.p2 {
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* --------------------------------------- */
+
+/* ------------------------------------- */
+
+/* ---------------------------------------- */
+@media screen and (max-width:992px) {
+    .nav-bar {
+        height: 70px;
+    }
+
+    .list2-nav {
+        left: 320px;
+        bottom: 0;
+    }
+
+    h1 {
+        font-size: 100px;
+    }
+
+    .text-last-sec h2 {
+        font-size: 50px;
+    }
+
+    .btn-last-sec {
+        width: 190px;
+    }
+
+    .part1-foot .logo-foot {
+        width: 80%;
+    }
+
+    .social-media-accounts {
+        width: 70%;
+        position: absolute;
+        bottom: 0;
+        justify-content: space-between;
+    }
+
+    .text {
+        width: 50%;
+        margin-left: 10px;
+    }
+
+    .p1 {
+        font-size: 25px;
+    }
+
+    .img-sec {
+        height: 500px;
+    }
+
+    img {
+        height: 100%;
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    nav {
+        display: none;
+    }
+
+    .dropdownn {
+        display: block;
+        background-color: white;
+    }
+
+    .text-last-sec h2 {
+        font-size: 55px;
+        text-align: center;
+    }
+
+    footer {
+        height: 150vh;
+        position: relative;
+    }
+
+    .part1-foot {
+        text-align: center;
+        width: 46%;
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+        .part1-foot p {
+            font-size: 25px;
+        }
+
+        .part1-foot h3 {
+            font-size: 35px;
+        }
+
+    .parent-foot {
+        display: inline-block;
+    }
+
+    .social-media-accounts {
+        bottom: -470px;
+        text-align: center;
+        font-size: 30px;
+        width: 100%;
+    }
+
+    .logo-foot {
+        margin-left: 20px;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .logo-nav {
+        width: 100%;
+    }
+
+    .container-navbar {
+        display: block;
+    }
+
+    .drop-navbar {
+        font-size: 60px;
+        margin-top: 25px;
+    }
+    /* ------------------------------------- */
+    .btn-last-sec {
+        width: 70%;
+        height: 70px;
+        margin: 25px;
+        margin-left: calc(30%/2);
+    }
+
+    .btns-last-sec {
+        display: block !important;
+    }
+    /* ----------------------------------------- */
+    footer {
+        height: 300%;
+        position: relative;
+    }
+
+    .part1-foot {
+        text-align: center;
+        width: 100%;
+        margin-top: 70px;
+    }
+
+        .part1-foot p {
+            font-size: 40px;
+        }
+
+        .part1-foot h3 {
+            font-size: 50px;
+        }
+
+    .social-media-accounts {
+        bottom: -1750px;
+        font-size: 40px;
+        width: 100%;
+    }
+
+    .logo-foot {
+        margin-left: 20px;
+    }
+    /* ---------------------------- */
+    .sec1 {
+        height: 180%;
+        margin-bottom: 50px;
+    }
+
+    .bottom-sec {
+        display: block !important;
+        text-align: center;
+    }
+
+        .bottom-sec h2 {
+            font-size: 80px;
+        }
+
+    .text {
+        width: 100%;
+    }
+
+        .text .p1 {
+            font-size: 30px;
+        }
+
+    .p2 {
+        font-size: 25px;
+    }
+    /* -------------------- */
+    .sec2 {
+        height: 170%;
+    }
+    /* -------------------------- */
+
+    .sec3 {
+        height: 170%;
+    }
+
+    h1 {
+        font-size: 70px;
+    }
+
+    .bottom-sec h2 {
+        font-size: 50px;
+    }
+
+    .drop-navbar li {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width:400px) {
+    h1 {
+        font-size: 55px;
+    }
+
+    .bottom-sec h2 {
+        font-size: 30px;
+    }
+
+    .social-media-accounts {
+        bottom: -1900px;
+        font-size: 50px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ShoesStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/css/cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Contact.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Sale.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Women.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/LookBook.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ourStory.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+
+
+
+    
+</head>
+<body>
+    <header>
+
+        <span class="dropdownn container">
+            <div class="  mt-3 mb-5 container-navbar">
+                <div  class="logo-nav ">
+                    <a asp-action="Index" asp-controller="Home"> <img src="~/Images/site-logo.svg" alt="this is photo"></a>
+
+                </div>
+                
+                <div class="ms-auto drop-navbar">
+                    <i class="fa-solid fa-bars dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-action="selectedGender" asp-route-gender="true" asp-controller="Select">MEN </a></li>
+                        <li><a class="dropdown-item" asp-action="selectedGender" asp-route-gender="false" asp-controller="Select">WOMEN</a></li>
+                        <li><a class="dropdown-item" asp-action="GetNextProducts" asp-controller="Select">COLLECTION</a></li>
+                        <li><a class="dropdown-item" asp-action="LookBook" asp-controller="Home">LOOKBOOK</a></li>
+                        <li><a class="dropdown-item" asp-action="GetNextSale" asp-controller="Select">SALE</a></li>
+                        <li><a class="dropdown-item" asp-controller="Home" asp-action="OurStory">OUR STORY</a></li>
+                        @{
+                            if(User.IsInRole(Rules.RuleAdmin))
+                            {
+                                        <li><a class="dropdown-item" asp-controller="DashBoard" asp-action="Index">DashBoard</a></li>
+
+                            }
+                            else
+                            {
+
+                                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Contact">CONTACT</a></li>
+                            }
+                        }
+                       
+                        <li>
+                            <a class="dropdown-item" >
+                                    <partial name="_LoginPartial" />
+                            </a>
+                        </li>
+                     
+
+                    </ul>
+                </div>
+
+            </div>
+        </span>
+        <nav>
+			
+			<div class="nav-bar d-flex container mt-5">
+                <div class="logo-nav">
+                    <a asp-action="Index" asp-controller="Home"><img src="~/Images/site-logo.svg" alt="this is photo"></a>
+                </div>
+                <div class="list-nav ms-4">
+                    <ul class="d-flex">
+                        <a asp-action="selectedGender" asp-route-gender="true" asp-controller="Select">
+                        <li>MEN</li>
+                        </a>
+                        <a asp-action="selectedGender" asp-route-gender="false" asp-controller="Select">
+                        <li>WOMEN</li>
+                        </a>
+                        <a asp-action="GetNextProducts" asp-controller="Select">
+                        <li>COLLECTION</li>
+                        </a>
+                        <a asp-action="LookBook" asp-controller="Home">
+                        <li>LOOKBOOK</li>
+                        </a>
+                        <a asp-action="GetNextSale" asp-controller="Select">
+                        <li>SALE</li>
+						</a>
+                        @* <partial name="_LoginPartial" /> *@
+                    </ul>
+                </div>
+                <div class="list2-nav">
+                    <ul class="d-flex">
+
+                        <a asp-controller="Home" asp-action="OurStory">
+                        <li>OUR STORY</li>
+                        </a>
+                        @{
+                            if (User.IsInRole(Rules.RuleAdmin)  )
+                            {
+                                        <a asp-controller="DashBoard" asp-action="Index">
+                                        <li>DASHBOARD</li>
+                                        </a>
+                            }
+                            else
+                            {
+                               
+                                        <a asp-controller="Home" asp-action="Contact">
+                                        <li>CONTACT</li>
+                                        </a>
+                            }
+                        }
+                       
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+        <main class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   <footer>
+        <div class="foot container ">
+            <div class="parent-foot ">
+                <div class="part1-foot">
+                    <div class="logo-foot">
+                        <img src="~/Images/site-logo.svg" alt="this is photo">
+                    </div>
+                    <p>Praesent eget tortor sit risus egestas nulla pharetra ornare quis bibendum est bibendum sapien
+                        proin
+                        nascetur</p>
+                    <div class="social-media-accounts d-flex">
+                        <div style="background-color: white;"><i class="fa-brands fa-square-instagram"></i></div>
+                        <div><i class="fa-solid fa-p"></i></div>
+                        <div><i class="fa-brands fa-facebook"></i></div>
+                        <div><i class="fa-brands fa-twitter"></i></div>
+                    </div>
+                </div>
+                <div class="part1-foot">
+                    <h3>Shop</h3>
+                    <p><a href="men.html">Shop Men</a></p>
+                    <p><a href="women.html">Shop Women</a></p>
+                    <p><a href="lookbook.html">Lookbook</a></p>
+                    <p><a href="#">Gift Card</a></p>
+                    <p><a href="sale.html">Sale</a></p>
+
+                </div>
+                <div class="part1-foot">
+                    <h3>About</h3>
+                    <p><a href="">Our Story</a></p>
+                    <p><a href="">Our Materials</a></p>
+                    <p><a href="">Our Value</a></p>
+                    <p><a href="">Sustainability</a></p>
+                    <p><a href="">Manufacture</a></p>
+
+                </div>
+                <div class="part1-foot">
+                    <h3>Need Help?</h3>
+                    <p><a href="">FAQs</a></p>
+                    <p><a href="">Shipping & Returns</a></p>
+                    <p><a href="">Shoe Care</a></p>
+                    <p><a href="">Size Chart</a></p>
+                    <p><a href="">Contact Us</a></p>
+
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

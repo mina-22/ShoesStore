@@ -1,0 +1,53 @@
+﻿@model  List<Blog>
+@{
+	Layout = "_Layout";
+}
+<div class="overview">
+    <div class="title">
+        <i class="uil uil-tachometer-fast-alt"></i>
+        <span class="text">Adding Product</span>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <td class="table-light">User Name</td>
+                    <td class="table-light">Email</td>
+                    <td class="table-light">Message</td>
+                    <td class="table-light">Delete</td>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.UserName</td>
+                            <td>@item.UserEmail</td>
+                            <td>@item.Message</td>
+                        
+
+                            <td>
+                                <a asp-action="DeleteBlog" asp-route-id="@item.Id" class="btn btn-danger " role="button">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

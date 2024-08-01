@@ -1,0 +1,321 @@
+﻿@model List<Product>
+
+<main class="">
+
+    <section class="sec1 ">
+        <div class="parent1 d-flex align-items-center ">
+            <div class="container">
+                <h1>Love the Planet we walk on</h1>
+                <p>
+                    Bibendum fermentum, aenean donec pretium aliquam blandit tempor imperdiet arcu arcu ut nunc in
+                    dictum mauris at ut.
+                </p>
+                <div class="btn-sec1">
+                    <a href="#"><button class="btns-sec1">SHOP MEN</button></a>
+                    <a href="#"><button class="btns-sec1">SHOP WOMEN</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- START SECTION THREE -->
+
+    <section class="sec3">
+        <div class="parent3 container ">
+            <div class="img-sec3">
+                <img src="~/Images/img-sec3.jpg" alt="this is photo">
+            </div>
+            <div class="text-sec3">
+                <p class="p1-sec3">ABOUT US</p>
+                <h2>  </h2>
+                <p class="p2-sec3">
+                    Nullam auctor faucibus ridiculus dignissim sed et auctor sed eget auctor nec sed
+
+                    adipiscing at ut magna.
+                </p>
+                <div class="link-parent">
+                    <a href="" class="link-sec3">READ MORE</a>
+                    <div class="underline-link"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- END SECTION THREE -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION FOUR -->
+    <section class="sec4 container">
+        <div class="parent4 ">
+            <div class="text-sec4">
+                <h2>See how your shoes are made</h2>
+                <p>
+                    Urna, felis enim orci accumsan urna blandit egestas mattis egestas feugiat viverra ornare donec
+                    adipiscing semper aliquet integer risus leo volutpat nulla enim ultrices
+                </p>
+            </div>
+
+            <div class="bottom-sec4 d-flex container">
+                <div class="cards-bottom-sec4">
+                    <div>
+
+                        <div class="card-bottom-sec4">
+                            <h3>Pet canvas</h3>
+                            <p>Morbi eget bibendum sit adipiscing morbi ac nisl vitae maecenas nulla cursus</p>
+                        </div>
+                        <div class="card-bottom-sec4 card2-bottom-sec4">
+                            <h3>Algae foam + vegan glue</h3>
+                            <p>Enim tincidunt donec vulputate magna pharetra mattis in</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-bottom-sec4">
+                    <div>
+                        <img src="~/Images/img-sec4.png" alt="">
+                    </div>
+                </div>
+                <div class="cards-bottom-sec4">
+                    <div>
+                        <div class="card-bottom-sec4 card3-bottom-sec4">
+                            <h3>Organic cotton</h3>
+                            <p>A vel ipsum, sed dignissim elementum ultrices amet</p>
+                        </div>
+                        <div class="card-bottom-sec4 card4-bottom-sec4">
+                            <h3>Upcycled plastic bottles</h3>
+                            <p>Pellentesque viverra amet netus facilisis amet felis odio tortor orci cursus est</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- END SECTION FOUR -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION FIVE -->
+
+    <section class="sec5 cards-height">
+        <div class="parent5">
+            <div class="text-sec5 d-flex ">
+                <h4>Our Best Seller</h4>
+                <p>VIEW ALL BEST SELLERS</p>
+
+            </div>
+            <div class="underline-p-sec5"></div>
+        </div>
+        <div class="cards-sec5 row mt-5">
+            @{
+                int cnt = 0;
+
+                foreach( Product i in Model)
+                {
+                    if (cnt == 6)
+                        break;
+                    <div class="card-sec5 col-4"  >
+                        <a asp-route-id="@i.Id" asp-action="SingleProduct" asp-controller="Home">
+                            <div class="img-card-sec5">
+                                <img src="~/Images/@i.PathImg" alt="">
+                                <div class="under-card d-flex align-items-center justify-content-center">Quick view</div>
+                            </div>
+                            <div class="text-card-sec5">
+                                <p class="p1-text-sec5">@i.Name</p>
+                                @if (i.Sale != 0)
+                                {
+                                    <p class="p2-text-sec5"><del>@i.Price$</del> @i.Sale$ </p>
+
+                                }
+                                else
+                                {
+                                    <p class="p2-text-sec5"> @i.Price$ </p>
+                                }
+
+
+                            </div>
+
+                      </a>
+                    </div>
+                    cnt++;
+                }
+               
+            }
+
+        </div>
+
+        </div>
+    </section>
+
+    <!-- END SECTION FIVE -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION SEX -->
+
+    <section class="sec6 container">
+        <div class="parent6">
+            <div class="cards-sec6  ">
+                <div class="card1-sec6 d-flex align-items-center justify-content-center">
+                    <div class="text-sec6 ">
+                        <p>MEN</p>
+                        <a href="#"><button>SHOP MEN</button></a>
+                    </div>
+                </div>
+                <div class="card2-sec6 d-flex align-items-center justify-content-center">
+                    <div class="text-sec6">
+                        <p>WOMEN</p>
+                        <a href="#"><button>SHOP WOMEN</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- END SECTION SEX -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION SEVEN -->
+
+    <section class="sec7">
+        <div class="parent7">
+            <div class="text-sec5 d-flex ">
+                <h4>New Arrivals</h4>
+                <p>VIEW ALL BEST SELLERS</p>
+
+            </div>
+            <div class="underline-p-sec5"></div>
+            <div class="cards-sec5 row mt-5">
+                @{
+
+                    List<Product> secondPart = Model.GetRange(cnt, Model.Count - cnt);
+                    int cnt2 = 0;
+                    foreach (Product i in secondPart)
+                    {
+                        if (cnt2 == 6)
+                            break;
+                        <div class="card-sec5 col-4">
+                           <a asp-route-id="@i.Id" asp-action="SingleProduct" asp-controller="Home">
+                                <div class="img-card-sec5">
+                                    <img src="~/Images/@i.PathImg" alt="">
+                                    <div class="under-card d-flex align-items-center justify-content-center">Quick view</div>
+                                </div>
+                                <div class="text-card-sec5">
+                                    <p class="p1-text-sec5">@i.Name</p>
+                                    @if (i.Sale != 0)
+                                    {
+                                        <p class="p2-text-sec5"><del>@i.Price$</del> @i.Sale$ </p>
+
+                                    }
+                                    else
+                                    {
+                                        <p class="p2-text-sec5"> @i.Price$ </p>
+                                    }
+
+
+                                </div>
+                           
+                           </a>
+
+                        </div>
+                        cnt2++;
+                    }
+               }
+            </div>
+
+            
+
+        </div>
+    </section>
+
+    <!-- END SECTION SEVEN -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION EIGHT -->
+
+    <section class="sec8 container">
+        <div class="parent8 ">
+            <div class="left-sec8 ">
+                <p>
+                    Eu eget felis erat mauris aliquam mattis lacus, arcu leo aliquam sapien pulvinar laoreet
+                    vulputate sem aliquet phasellus egestas felis, est, vulputate morbi massa mauris vestibulum dui
+                    odio.
+                </p>
+                <div class="d-flex logos-sec8">
+                    <div class="logo-sec8"><img src="~/Images/logo1.svg" alt=""></div>
+                    <div class="logo-sec8"> <img src="~/Images/logo2.svg" alt=""></div>
+                    <div class="logo-sec8"> <img src="~/Images/logo3.svg" alt=""></div>
+                </div>
+            </div>
+            <div class="right-sec8">
+
+                <img src="~/Images/recycled-shoe-store-recycled-circle-iamge.jpg" alt="this is photo"
+                     style="border-radius: 50%;">
+
+            </div>
+        </div>
+    </section>
+
+    <!-- END SECTION EIGHT -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION NINE -->
+
+    <section class="sec9">
+        <div class="parent9 container">
+            <h2>Our Users speak for us</h2>
+            <div class="users-sec9 ">
+                <div class="user-sec9 container">
+                    <p>
+                        “Felis semper duis massa scelerisque ac amet porttitor ac tellus venenatis aliquam varius
+                        mauris integer”
+                    </p>
+                    <div class="img-user d-flex">
+                        <img src="~/Images/recycled-shoe-store-customer-avatar-image-3.jpg" alt="this is photo">
+                        <p>JULIA KEYS</p>
+                    </div>
+                </div>
+                <div class="user-sec9 container">
+                    <p>
+                        “Felis semper duis massa scelerisque ac amet porttitor ac tellus venenatis aliquam varius
+                        mauris integer”
+                    </p>
+                    <div class="img-user d-flex">
+                        <img src="~/Images/recycled-shoe-store-customer-avatar-image-2.jpg" alt="this is photo">
+                        <p>
+                            LUIS ADRIAN
+                        </p>
+                    </div>
+                </div>
+                <div class="user-sec9 container">
+                    <p>
+                        “Felis semper duis massa scelerisque ac amet porttitor ac tellus venenatis aliquam varius
+                        mauris integer”
+                    </p>
+                    <div class="img-user d-flex">
+                        <img src="~/Images/recycled-shoe-store-customer-avatar-image-1.jpg" alt="this is photo">
+                        <p> MARIA ANNA</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <p class="reviews-sec9">4.8 average rating from 1814 reviews</p>
+    </section>
+
+    <!-- END SECTION NINE -->
+    <!-- ---------------------------------------- -->
+    <!-- START SECTION TEN -->
+    <section class="last-sec">
+        <div class="last-parent d-flex justify-content-center align-items-center">
+            <div class="text-last-sec ">
+                <h2>Better for People & the Planet</h2>
+                <p>Ut eget at et aliquam sit quis nisl, pharetra et ac pharetra est dictum in vulputate</p>
+                <div class="d-flex justify-content-center btns-last-sec">
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            MEN SHOP
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            WOMEN SHOP
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

@@ -1,0 +1,141 @@
+﻿@model ProductsCollection
+@{
+    Layout = "_SharedLayOut";
+    var incrementnum = Model.CollectionNum + 1;
+    var decnum = Model.CollectionNum - 1;
+}
+<main>
+    <!-- START OF SECTION ONE -->
+    <section class="sec1-col ">
+        <div class="parent1-col container">
+            <div class="cnt">
+                <div class="flexxing">
+                    <div class="left-top-sec1 ">
+                        <h1>Men</h1>
+                        <div class="d-flex mb-2">
+                            <a class="btn btn-secondary me-4 btn-select" role="button" onclick="submitForm2()">
+                                <span class="material-symbols-outlined">
+                                    Previous
+                                </span>
+                            </a>
+                            <a class="btn btn-secondary btn-select" role="button" id="btn-next" onclick="submitForm()">
+                                <span class="material-symbols-outlined">
+                                    Next
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center mt-5" style=" width: 50px;
+                          height: 50px;
+                           border-radius: 50%;
+                          background-color: #6e7051;
+                              padding-top : 1%;
+                        color : white;
+                          font-size: 35px;">
+                        <p> @incrementnum</p>
+                    </div>
+                    <div class="right-top-sec1 d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Default sorting
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Default sorting </a></li>
+                                <li><a class="dropdown-item" href="#">Sort by popularity</a></li>
+                                <li><a class="dropdown-item" href="#">Sort by average rating</a></li>
+                                <li><a class="dropdown-item" href="#">Sort by latest</a></li>
+                                <li><a class="dropdown-item" href="#">Sort by price : low to high</a></li>
+                                <li><a class="dropdown-item" href="#">Sort by price : high to low</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex icons-sec1 mt-2">
+                            <i class="fa-regular fa-image me-3" id="cardShow"></i>
+                            <i class="fa-solid fa-bars" id="discriptionCardShow"></i>
+                        </div>
+                    </div>
+                </div>
+                    <div class="cards-sec5 row mt-5">
+
+                    @{
+                        @foreach (var p in Model.products)
+                        {
+                            <div class="card-sec5 col-4 items card">
+                            <a asp-route-id="@p.Id" asp-action="SingleProduct" asp-controller="Home">
+                                <div class="img-card-sec5 img-card">
+                                    <img src="~/Images/@p.PathImg" alt="">
+                                    <div class="under-card d-flex align-items-center justify-content-center">
+                                        Quick view
+                                    </div>
+                                </div>
+                                <div class="text-card-sec5">
+                                    <p class="p1-text-sec5">@p.Name</p>
+                                    @if (p.Sale != 0)
+                                    {
+                                        <p class="p2-text-sec5"><del>@p.Price$</del> @p.Sale$ </p>
+
+                                    }
+                                    else
+                                    {
+                                        <p class="p2-text-sec5"> @p.Price$ </p>
+                                    }
+                                    <div class="description-card">
+                                        <p>
+                                            @p.Description purus non pellentesque amet,
+                                            nunc sit eu, enim fringilla egestas pulvinar odio feugiat consectetur egestas
+                                            magna pharetra cursus risus, lectus enim eget eu et lobortis faucibus.
+                                        </p>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="last-sec">
+        <div class="last-parent d-flex justify-content-center align-items-center">
+            <div class="text-last-sec ">
+                <h2>Better for People & the Planet</h2>
+                <p>Ut eget at et aliquam sit quis nisl, pharetra et ac pharetra est dictum in vulputate</p>
+                <div class="d-flex justify-content-center btns-last-sec">
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            MEN SHOP
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="btn-last-sec">
+                            WOMEN SHOP
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <form id="myForm" asp-action="GetNextGender">
+        <input hidden asp-for="Gender" value="true" type="radio" checked />
+        <input hidden asp-for="CollectionNum" value="@incrementnum" />
+
+    </form>
+    <form id="myForm2" asp-action="GetPreviousGender">
+        <input hidden asp-for="Gender" value="true" type="radio" checked />
+        <input hidden asp-for="CollectionNum" value="@decnum" />
+
+    </form>
+</main>
+<script>
+    function submitForm() {
+        document.getElementById("myForm").submit();
+    }
+    function submitForm2() {
+        document.getElementById("myForm2").submit();
+    }
+</script>

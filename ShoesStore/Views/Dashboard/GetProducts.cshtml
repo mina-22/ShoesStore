@@ -1,0 +1,78 @@
+﻿@model List<Product>
+@{
+    Layout = "_Layout";
+}
+
+<div class="overview">
+    <div class="title">
+        <i class="uil uil-tachometer-fast-alt"></i>
+        <span class="text">Adding Product</span>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <td class="table-light">Name</td>
+                    <td class="table-light">Description</td>
+                    <td class="table-light">price</td>
+                    <td class="table-light">Sale</td>
+                     <td class="table-light">Gender</td>
+                    <td class="table-light">Image</td>
+                    <td class="table-light">operation</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model!=null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>@item.Price</td>
+                            <td>@item.Sale</td>
+                            @{
+                                if (item.Gender == true)
+                                {
+                                    <td>Man</td>
+                                }
+                                else
+                                {
+                                    <td>Woman</td>
+                                }
+                            }
+                            <td>
+                                <img src="~/Images/@item.PathImg" width="100px" height="60px">
+                            </td>
+
+
+
+                            <td>
+
+
+                                <a asp-action="AddProduct" asp-route-id="@item.Id" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        edit
+                                    </span>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger " role="button">
+                                    <span class="material-symbols-outlined">
+                                        delete
+                                    </span>
+                                </a>
+                            </td>
+
+
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

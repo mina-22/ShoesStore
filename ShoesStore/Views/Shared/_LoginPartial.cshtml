@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+   <div class="d-flex">
+
+            <a class="text-dark text-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                   <li><i class="fa-solid fa-user" title="@User.Identity?.Name!"></i></li>
+           </a>
+            @{
+                if(User.IsInRole(Rules.RuleUser))
+                {
+                <li >
+                    <a asp-controller="Home" asp-action="Cart" >
+                        <i class="fa-solid fa-bag-shopping "></i>
+
+                    </a>
+
+                </li>
+                }
+            }
+        
+           <li>
+             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark" style="font-size: 20px;">Logout</button>
+             </form>
+          </li>
+    </div>
+}
+else
+{
+
+       <div class="d-flex">
+
+            <a asp-area="Identity" asp-page="/Account/Register" id="register">
+        <li class="nav-item">
+            Register
+        </li>
+
+        </a>
+
+        <a asp-area="Identity" asp-page="/Account/Login">
+        <li class="nav-item">
+            Login
+        </li></a>
+       </div>
+       
+}
+</ul>
