@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.StaticFiles;
 using Mono.TextTemplating;
 using ShoesStore.Data;
 using ShoesStore.Models;
+using System.ComponentModel;
 namespace ShoesStore.Controllers.Dashboard
 {
     public class DashboardController (ApplicationDbContext _db ,IWebHostEnvironment hosting): Controller
@@ -48,7 +51,8 @@ namespace ShoesStore.Controllers.Dashboard
             }
             return true;
         }
-		[Authorize(Roles = Rules.RuleAdmin)]
+        [Authorize(Roles = Rules.RuleAdmin)]
+
 
 		public IActionResult GetProducts()
         {
@@ -63,6 +67,7 @@ namespace ShoesStore.Controllers.Dashboard
            if(id != 0)
             {
                 Product prod = _db.Products.Find(id);
+            
                 return View(prod);
             }
             else
@@ -76,6 +81,8 @@ namespace ShoesStore.Controllers.Dashboard
 
 		public IActionResult AddProduct(Product product)
         {
+
+           
             if(!ModelState.IsValid)
             {
                 return View(product);
@@ -90,9 +97,9 @@ namespace ShoesStore.Controllers.Dashboard
                 prod.Price = product.Price;
                 prod.Sale = product.Sale;
                 prod.Gender = product.Gender;
-                 RmoveImage(prod);
-               
-                if(AddImage(product, product) == false)
+                RmoveImage(prod);
+
+                if (AddImage(product, product) == false)
                 {
                     TempData["ExistImage"] = "This File is Already Exist";
                     return RedirectToAction("AddProduct", product.Id);
@@ -116,8 +123,8 @@ namespace ShoesStore.Controllers.Dashboard
             _db.SaveChanges();
                return RedirectToAction("GetProducts");
         }
-		[Authorize(Roles = Rules.RuleAdmin)]
 
+		[Authorize(Roles = Rules.RuleAdmin)]
 		public IActionResult Delete(int id)
         {
             Product prod = _db.Products.FirstOrDefault(x => x.Id == id);

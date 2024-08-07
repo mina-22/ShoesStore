@@ -111,9 +111,9 @@
             let quantity = parseInt(quantityInput.value);
 
             if (action === 'increase') {
-                quantity += 1;
+                quantity =1;
             } else if (action === 'decrease') {
-                quantity = Math.max(1, quantity - 1);
+                quantity = -1;
             }
 
             quantityInput.value = quantity;

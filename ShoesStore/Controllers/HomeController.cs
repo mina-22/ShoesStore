@@ -22,7 +22,7 @@ namespace ShoesStore.Controllers
 		{
 			var userId = _userManager.GetUserId(User);
 			var user = _db.Users.Include(m=>m.cart).SingleOrDefault(m=>m.Id == userId);
-			List<CartProduct> cartProducts = _db.cartProduct.Include(m=>m.product).Where(m=>m.CartId==user.cart.Id).ToList();
+			List<CartProduct> cartProducts = _db.cartProduct.Include(m=>m.product).Where(  m=>m.CartId==user.cart.Id).ToList();
             List<QuantityProduct> Qproducts = new List<QuantityProduct>();
 			foreach(var item in cartProducts)
 			{
@@ -46,17 +46,19 @@ namespace ShoesStore.Controllers
 		}
 		//handel duplecate elements
 		[HttpPost]
+		[Authorize(Roles = Rules.RuleUser)]
         public IActionResult AddToCart(QuantityProduct Qproduct)
 		{
 			var userId = _userManager.GetUserId(User);
 			var user = _db.Users.Include(m => m.cart).SingleOrDefault(m => m.Id == userId);
+
 			var prod = _db.Products.Find(Qproduct.product.Id);
-          List<  CartProduct >ProductCard = _db.cartProduct.Where(m => m.productId == Qproduct.product.Id).ToList();
+          List<  CartProduct >ProductCard = _db.cartProduct.Where(m => m.productId == Qproduct.product.Id && m.CartId == user.cart.Id).ToList();
 			
 			if (ProductCard.Count != 0) 
 
             {
-				ProductCard[0].Quantity = Math.Max(Qproduct.Quantity,1);
+				ProductCard[0].Quantity = Math.Min( Math.Max(Math.Abs(Qproduct.Quantity) +  ProductCard[0].Quantity, 1) ,50);
 				_db.cartProduct.Update(ProductCard[0]);
 				_db.SaveChanges();
 				return RedirectToAction("Cart");
@@ -64,7 +66,7 @@ namespace ShoesStore.Controllers
 			else
 			{
                 CartProduct cartProduct = new CartProduct();
-                cartProduct.Quantity = Qproduct.Quantity;
+                cartProduct.Quantity =Math.Min( Math.Abs(Qproduct.Quantity) ,50);
                 cartProduct.CartId = user.cart.Id;
                 cartProduct.productId = Qproduct.product.Id;
 
@@ -73,7 +75,7 @@ namespace ShoesStore.Controllers
 			
 			_db.SaveChanges();
 			Qproduct.product = prod;
-			return View("SingleProduct", Qproduct);
+			return RedirectToAction("Cart");
 		}
 		
 		[Authorize]
