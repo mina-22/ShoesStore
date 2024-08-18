@@ -67,7 +67,6 @@ namespace ShoesStore.Controllers.Dashboard
            if(id != 0)
             {
                 Product prod = _db.Products.Find(id);
-            
                 return View(prod);
             }
             else
@@ -75,14 +74,12 @@ namespace ShoesStore.Controllers.Dashboard
         }
 		[Authorize(Roles = Rules.RuleAdmin)]
 
-
 		[HttpPost]
 		[Authorize(Roles = Rules.RuleAdmin)]
 
 		public IActionResult AddProduct(Product product)
         {
 
-           
             if(!ModelState.IsValid)
             {
                 return View(product);
@@ -106,10 +103,8 @@ namespace ShoesStore.Controllers.Dashboard
                 }
                 _db.Products.Update(prod);
             }
-
             else
-            {
-                 
+            {  
                 if (AddImage(product, product)== false)
                 {
                     TempData["ExistImage"] = "This File is Already Exist";

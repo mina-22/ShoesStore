@@ -17,11 +17,11 @@
                         @{
                             if (Model.product.Gender)
                             {
-                                <a href="" class="men-single">Men</a>
+                                    <a href="" class="men-single">Men</a>
                             }
                             else
                             {
-                                <a href="" class="men-single">Women</a>
+                                    <a href="" class="men-single">Women</a>
                             }
 
                         }
@@ -29,12 +29,25 @@
                         <span>, </span>
                         <a href="" class="Sneaker-single">Sneaker</a>
                     </div>
-                    <p class="blue-single">@Model.product.Name</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="blue-single">@Model.product.Name</p>
+                        @if(Model.IsFavorite)
+                        {
+                            <i class="fas fa-heart fav-icon fav-color fs-3" productIdCustom="@Model.product.Id" cancelo="@Model.FavId"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-heart fav-icon  fs-3" productIdCustom="@Model.product.Id" ></i>
+
+                        }
+
+                    </div>
+                    
                     <div class="delete-single">
                         @{
                             if (Model.product.Sale > 0)
                             {
-                                <del class="bdl-single">$@Model.product.Sale</del>
+                                    <del class="bdl-single">$@Model.product.Sale</del>
                             }
                         }
 
@@ -57,6 +70,8 @@
                         
                     <button type="submit" onclick="submitForm()" class="btn btn-secondary mt-5">Add to Cart</button>
 
+
+
                 </div>
             </div>
         </div>
@@ -64,20 +79,82 @@
 </main>
 <script> 
 
-    document.querySelector('.minus-single').addEventListener('click', function () {
+    
+
+        document.querySelector('.minus-single').addEventListener('click', function () {
         let input = document.getElementById('quantity');
         let value = parseInt(input.value);
         if (value > 1)
-            input.value = value - 1;
-    });
-    document.querySelector('.plus-single').addEventListener('click', function () {
+        input.value = value - 1;
+        });
+        document.querySelector('.plus-single').addEventListener('click', function () {
         let input = document.getElementById('quantity');
         let value = parseInt(input.value);
         if (value > 50)
-            value = 49;
+        value = 49;
         input.value = value + 1;
-    });
-    function submitForm() {
+        });
+        function submitForm() {
         document.getElementById("myForm").submit();
-    }
+        }
+        
+
+
+
+
+    let icons = document.querySelector(".fav-icon");
+
+    console.log(icons);
+    icons.addEventListener("click", function () {
+      
+
+            if (icons.classList.contains("fav-color")) {
+            let productId = +(icons.getAttribute("productIdCustom"));
+            let id = +(icons.getAttribute("cancelo"));
+
+                let FavUser =
+                {
+                    ProductId: productId,
+                    Id: id
+
+                };
+
+               
+                $.ajax({
+                url: '/Home/RemoveFav',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(FavUser),
+                success: function () {
+                icons.classList.remove("fav-color");
+                icons.classList.remove("fas");
+                icons.classList.add("far");
+                }
+                })
+               
+            }
+            else {
+            let productId = +(icons.getAttribute("productIdCustom"));
+
+                let FavUser =
+                {
+                    ProductId: productId,
+                    Id: 0
+                };
+
+                $.ajax({
+                url: '/Home/AddFav',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(FavUser),
+                    success: function (id) {
+                    icons.setAttribute("cancelo" , id )
+                    icons.classList.add("fav-color");
+                    icons.classList.add("fas");
+                    icons.classList.remove("far");
+                    }
+                })
+            }
+        });
+    
 </script>

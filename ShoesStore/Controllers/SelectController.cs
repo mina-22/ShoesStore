@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ShoesStore.Data;
 using ShoesStore.Models;
@@ -6,13 +7,13 @@ using ShoesStore.Models.ViewModels;
 
 namespace ShoesStore.Controllers
 {
-    public class SelectController(ApplicationDbContext _db) : Controller
+    [Authorize]
+    public class SelectController(ApplicationDbContext _db , UserManager<AppUser> _userManager) : Controller
     {
         public IActionResult Index()
         {
             return View();
-        }
-        [Authorize]
+        }   
          public IActionResult selectedGender(bool gender)
         {
             ProductsCollection productsCollection = new ProductsCollection();
@@ -20,7 +21,6 @@ namespace ShoesStore.Controllers
             return RedirectToAction("GetNextGender", productsCollection);
 
         }
-        [Authorize]
         public IActionResult GetNextProducts(int CollectionNum)
         {
             int count = _db.Products.Count();
@@ -31,8 +31,6 @@ namespace ShoesStore.Controllers
             productsCollection.CollectionNum = CollectionNum;
             return View("Collection", productsCollection);
         }
-
-        [Authorize]
         public IActionResult GetPreviousProducts(int  CollectionNum)
         {
             int count = _db.Products.Count();
@@ -48,8 +46,6 @@ namespace ShoesStore.Controllers
 
             return View("Collection", productsCollection);
         }
-        [Authorize]
-
         public IActionResult GetNextGender(ProductsCollection productsCollection)
         {
            List<Product> products = _db.Products.Where(m=>m.Gender == productsCollection.Gender).ToList();
@@ -62,7 +58,6 @@ namespace ShoesStore.Controllers
             else
 				return View("Women", productsCollection);
 		}
-        [Authorize]
         public IActionResult GetPreviousGender(ProductsCollection productsCollection)
         {
             List<Product> products = _db.Products.Where(m => m.Gender == productsCollection.Gender).ToList();
@@ -74,7 +69,6 @@ namespace ShoesStore.Controllers
             else
                 return View("Women", productsCollection);
         }
-        [Authorize]
         public IActionResult GetNextSale(int CollectionNum)
         {
 
@@ -87,7 +81,6 @@ namespace ShoesStore.Controllers
 
             return View("Sale", productsCollection);
         }
-        [Authorize]
         public IActionResult GetPreviousSale(int CollectionNum)
         {
             List<Product> products = _db.Products.Where(m => m.Sale > 0).ToList();
@@ -102,5 +95,7 @@ namespace ShoesStore.Controllers
 
             return View("Sale", productsCollection);
         }
+
+       
     }
 }

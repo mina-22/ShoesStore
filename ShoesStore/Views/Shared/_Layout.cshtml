@@ -46,7 +46,7 @@
                 <li>
                     <a asp-action="GetBlogs" asp-controller="Dashboard">
                         <i class="uil uil-chart"></i>
-                        <span class="link-name">View Blogs</span>
+                        <span class="link-name">Comments</span>
                     </a>
                 </li>
                 
@@ -54,7 +54,12 @@
             </ul>
 
             <ul class="logout-mode">
-
+                <li>
+                    <a asp-action="Index" asp-controller="Home">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Home Page</span>
+                    </a>
+                </li>
                 <li class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
@@ -82,11 +87,7 @@
         </div>
 
         <div class="dash-content">
-
             @RenderBody()
-
-
-
         </div>
 
     </section>

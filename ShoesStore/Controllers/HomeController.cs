@@ -6,12 +6,12 @@ using ShoesStore.Data;
 using ShoesStore.Models;
 using ShoesStore.Models.ViewModels;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ShoesStore.Controllers
 {
-	public class HomeController(ApplicationDbContext _db , UserManager<AppUser> _userManager) : Controller
+	public class HomeController(ApplicationDbContext _db , UserManager<AppUser> _userManager, ILogger<HomeController> _logger) : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 			
         public IActionResult Index()
 		{
@@ -58,7 +58,7 @@ namespace ShoesStore.Controllers
 			if (ProductCard.Count != 0) 
 
             {
-				ProductCard[0].Quantity = Math.Min( Math.Max(Math.Abs(Qproduct.Quantity) +  ProductCard[0].Quantity, 1) ,50);
+				ProductCard[0].Quantity = Math.Min( Math.Max(Qproduct.Quantity +  ProductCard[0].Quantity, 1) ,50);
 				_db.cartProduct.Update(ProductCard[0]);
 				_db.SaveChanges();
 				return RedirectToAction("Cart");
@@ -77,7 +77,6 @@ namespace ShoesStore.Controllers
 			Qproduct.product = prod;
 			return RedirectToAction("Cart");
 		}
-		
 		[Authorize]
         public IActionResult Contact()
 		{
@@ -109,11 +108,24 @@ namespace ShoesStore.Controllers
         public IActionResult SingleProduct(int id)
 		{
 			var prod = _db.Products.Find(id);
+            var userId = _userManager.GetUserId(User);
+			var  mina = _db.favorites.FirstOrDefault(m => m.ProductId == id && userId == m.UserId) ;
+
+
 			QuantityProduct cartProduct = new QuantityProduct
 			{
-				product = prod 
-			};
-			return View(cartProduct);
+				product = prod,
+				IsFavorite = false,
+				FavId = 0
+            };
+			// ----------------------------------------
+			if(mina  != null)
+			{
+				cartProduct.IsFavorite = true;
+				cartProduct.FavId = mina.Id;
+			}
+			// ----------------------------------------
+                return View(cartProduct);
 		}
 		public IActionResult LookBook()
 		{
@@ -123,8 +135,37 @@ namespace ShoesStore.Controllers
 		{
 			return View();
 		}
+        [HttpPost]
+        public IActionResult RemoveFav([FromBody] FavUser fav)
+        {
+            var Fav = _db.favorites.Find(fav.Id);
+            _db.Remove(Fav);
+            _db.SaveChanges();
 
-		public IActionResult Privacy()
+            return Ok();
+        }
+        [HttpPost]
+
+        public IActionResult AddFav([FromBody] FavUser fav)
+        {
+            Favorite Fav = new Favorite
+            {
+                UserId = _userManager.GetUserId(User),
+                ProductId = fav.ProductId,
+
+            };
+            _db.favorites.Add(Fav);
+            _db.SaveChanges();
+            return Ok(Fav.Id);
+        }
+		public IActionResult ViewFavorite()
+		{
+			var UserId = _userManager.GetUserId(User);
+			var favorites = _db.favorites.Where(m => m.UserId == UserId).Include(m=>m.product).ToList();
+		
+			return View(favorites);
+		}
+        public IActionResult Privacy()
 		{
 			return View();
 		}

@@ -1,3 +1,4 @@
+
 let cardShow = document.querySelector("#cardShow");
 let discriptionCardShow = document.querySelector("#discriptionCardShow");
 let card = document.querySelectorAll(".card");
@@ -22,6 +23,6 @@ discriptionCardShow.addEventListener("click", function () {
         descriptionCard[i].style.display = "flex";
 
     }
-})
+});
 
 

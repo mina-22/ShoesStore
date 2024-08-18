@@ -46,12 +46,12 @@
                             }
 
                                                 <td>
-                                <form asp-action="AddToCart" asp-controller="Home">
+                                <form asp-action="AddToCart" asp-controller="Home" >
                                     <button type="button" class="quantity-btn" data-action="decrease">-</button>
                                     <input type="hidden" name="product.Id" value="@item.product.Id" />
                                     <input type="hidden" name="Quantity" value="@value" />
-                                    <input type="hidden" name="ItemId" asp-for="@item.ItemId" />
-                                    <input type="text" value="@value" disabled>
+                                    <input type="hidden" name="ItemId" asp-for="@item.ItemId"/>
+                                    <input type="text" value="@value" class="text-center" disabled>
                                     <button type="button" class="quantity-btn" data-action="increase">+</button>
                                     <input type="submit" style="display:none;" />
                                 </form>

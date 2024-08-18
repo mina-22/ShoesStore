@@ -1,0 +1,35 @@
+﻿@model List<Favorite>
+
+<div class="cards-sec5 row mt-5 mx-auto" >
+
+    @{
+        @foreach (var p in Model)
+        {
+            <div class="card-sec5 col-4 items card" style="border:none;">
+               
+                    <div class="img-card-sec5 img-card">
+                        <img src="~/Images/@p.product.PathImg" alt="">
+                        <div class="under-card d-flex align-items-center justify-content-center">
+                            Quick view
+                        </div>
+                    </div>
+                    <div class="text-card-sec5">
+                        <p class="p1-text-sec5">@p.product.Name</p>
+                        @if (p.product.Sale != 0)
+                        {
+                            <p class="p2-text-sec5"><del>@p.product.Price$</del> @p.product.Sale$ </p>
+
+                        }
+                        else
+                        {
+                            <p class="p2-text-sec5"> @p.product.Price$ </p>
+                        }
+                      
+                    </div>
+                
+            </div>
+        }
+    }
+
+
+</div>

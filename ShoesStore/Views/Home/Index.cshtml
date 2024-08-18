@@ -110,38 +110,35 @@
                 {
                     if (cnt == 6)
                         break;
-                    <div class="card-sec5 col-4"  >
+                    <div class="card-sec5 col-4">
                         <a asp-route-id="@i.Id" asp-action="SingleProduct" asp-controller="Home">
                             <div class="img-card-sec5">
                                 <img src="~/Images/@i.PathImg" alt="">
                                 <div class="under-card d-flex align-items-center justify-content-center">Quick view</div>
                             </div>
-                            <div class="text-card-sec5">
-                                <p class="p1-text-sec5">@i.Name</p>
-                                @if (i.Sale != 0)
-                                {
-                                    <p class="p2-text-sec5"><del>@i.Price$</del> @i.Sale$ </p>
+                        </a>
+                        <div class="text-card-sec5">
+                            <p class="p1-text-sec5">@i.Name</p>
+                            @if (i.Sale != 0)
+                            {
+                                <p class="p2-text-sec5"><del>@i.Price$</del> @i.Sale$ </p>
 
-                                }
-                                else
-                                {
-                                    <p class="p2-text-sec5"> @i.Price$ </p>
-                                }
-
-
-                            </div>
-
-                      </a>
+                            }
+                            else
+                            {
+                                <p class="p2-text-sec5"> @i.Price$ </p>
+                            }
+                        </div>
+   
                     </div>
                     cnt++;
                 }
                
             }
-
         </div>
+  
 
-        </div>
-    </section>
+   </section>
 
     <!-- END SECTION FIVE -->
     <!-- ---------------------------------------- -->
